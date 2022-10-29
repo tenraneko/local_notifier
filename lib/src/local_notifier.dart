@@ -107,6 +107,7 @@ class LocalNotifier {
 
     final Map<String, dynamic> arguments = notification.toJson();
     arguments['appName'] = _appName;
+    arguments['body'] = _appName;
     await _channel.invokeMethod('notify', arguments);
   }
 
