@@ -96,7 +96,7 @@ class LocalNotifier {
   }
 
   /// Immediately shows the notification to the user.
-  Future<void> notify(LocalNotification notification) async {
+  Future<dynamic> notify(LocalNotification notification) async {
     if ((Platform.isLinux || Platform.isWindows) && !_isInitialized) {
       throw Exception(
         'Not initialized, please call `localNotifier.setup` first to initialize',
@@ -107,8 +107,9 @@ class LocalNotifier {
 
     final Map<String, dynamic> arguments = notification.toJson();
     arguments['appName'] = _appName;
-    arguments['body'] = _appName;
     await _channel.invokeMethod('notify', arguments);
+    
+    return arguments;
   }
 
   /// Closes the notification immediately.
